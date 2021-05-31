@@ -1,25 +1,21 @@
 function init() {
     var eqQueryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
     var platesQueryUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json"
-    // Perform a GET request to the query URL
+    // Perform a GET request to the query URLs
     d3.json(eqQueryUrl, function (eqData) {
-        // Once we get a response, send the data.features object to the createFeatures function
-        console.log(eqData)
-        // get plate data
+        //console.log(eqData)
         d3.json(platesQueryUrl, function(plateData){
-            console.log(plateData);
+            //console.log(plateData);
             createFeatures(eqData.features, plateData.features);
         });
     });
 
 }
 
-
-
 function createFeatures(earthquakeData, plateData) {
 
     function onEachFeature(feature, layer) {
-        layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>Magnitude: ${feature.properties.mag}<br>Date: ${new Date(feature.properties.time)}`);
+        layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>Magnitude: ${feature.properties.mag}<br>Depth: ${feature.geometry.coordinates[2]}<br>Date: ${new Date(feature.properties.time)}`);
 
     };
 
