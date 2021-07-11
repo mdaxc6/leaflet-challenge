@@ -1,4 +1,4 @@
-# leaflet-challenge
+# Leaflet Earthquake Visualization
 
 
 This project's goal was to visualize earthquake data geospatially using data from USGS. 
